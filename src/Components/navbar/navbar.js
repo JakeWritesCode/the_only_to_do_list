@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Navbar, Container, Nav, NavDropdown} from "react-bootstrap";
+import {Navbar, Container, Nav} from "react-bootstrap";
 import "base.scss"
 
 export default function TodoNavbar(props) {
@@ -12,7 +12,13 @@ export default function TodoNavbar(props) {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         {props.buttons.map((button, index) => (
-                            <Nav.Link key={index} onClick={button.onClick}>{button.text}</Nav.Link>
+                            <Nav.Link
+                                id={"nav-link-" + index}
+                                key={index}
+                                onClick={button.onClick}
+                                className={button.active ? "text-bold" : ""}>
+                                {button.text}
+                            </Nav.Link>
                         ))}
                     </Nav>
                 </Navbar.Collapse>

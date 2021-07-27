@@ -12,3 +12,7 @@ $color-secondary: #ff5858;
 .bg-todo-primary {
   @include main-gradient
 }
+
+.text-bold {
+  font-weight: bold;
+}

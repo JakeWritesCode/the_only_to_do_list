@@ -7,32 +7,42 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "logged_in": false
+            "logged_in": false,
+            "active_area": "Home"
         }
-        this.navbarButtons = [
-            {
-                "text": "Home",
-                "onClick": () => console.log("Home Clicked")
-            },
-            {
-                "text": this.state.logged_in ? "Log Out" : "Log In",
-                "onClick": () => console.log("Log in / Out Clicked")
-            },
-            {
-                "text": "To-Do List",
-                "onClick": () => console.log("To-Do Clicked")
-            },
-            {
-                "text": "Reminders",
-                "onClick": () => console.log("Reminders Clicked")
-            }
-        ]
+    }
+
+    navBarButtons() {
+        return (
+            [
+                {
+                    "text": "Home",
+                    "onClick": () => this.setState({"active_area": "Home"}),
+                    "active": this.state.active_area === "Home"
+                },
+                {
+                    "text": this.state.logged_in ? "Log Out" : "Log In",
+                    "onClick": () => this.setState({"active_area": "Log In / Out"}),
+                    "active": this.state.active_area === "Log In / Out"
+                },
+                {
+                    "text": "To-Do List",
+                    "onClick": () => this.setState({"active_area": "To-Do List"}),
+                    "active": this.state.active_area === "To-Do List"
+                },
+                {
+                    "text": "Reminders",
+                    "onClick": () => this.setState({"active_area": "Reminders"}),
+                    "active": this.state.active_area === "Reminders"
+                }
+            ]
+        )
     }
 
     render() {
         return (
             <div>
-                <TodoNavbar homeText="Jakes To-Do List" buttons={this.navbarButtons}/>
+                <TodoNavbar homeText="Jakes To-Do List" buttons={this.navBarButtons()}/>
                 <h1>Hello</h1>
             </div>
         )
