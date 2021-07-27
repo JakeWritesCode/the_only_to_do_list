@@ -2,6 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import TodoNavbar from "./Components/navbar/navbar";
+import HomeSplash from "./Components/home_splash/home_splash";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -43,7 +44,7 @@ export default class App extends React.Component {
         return (
             <div>
                 <TodoNavbar homeText="Jakes To-Do List" buttons={this.navBarButtons()}/>
-                <h1>Hello</h1>
+                <HomeSplash/>
             </div>
         )
     }

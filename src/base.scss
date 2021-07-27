@@ -1,18 +1,40 @@
 // Base scss file for the to-do list app
 
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+body {
+  font-family: 'Cabin', sans-serif;
+}
+
 $color-primary: #f857a8;
 $color-secondary: #ff5858;
+$color-tertiary: #ff1717;
+$color-contrast: #188bff;
 
-@mixin main-gradient {
+@mixin primary-gradient {
   background: $color-primary;
   background: -webkit-linear-gradient(45deg, $color-primary, $color-secondary);
   background: linear-gradient(45deg, $color-primary, $color-secondary);
 }
 
+@mixin secondary-gradient {
+  background: $color-secondary;
+  background: -webkit-linear-gradient(45deg, $color-secondary, $color-tertiary);
+  background: linear-gradient(45deg, $color-secondary, $color-tertiary);
+}
+
 .bg-todo-primary {
-  @include main-gradient
+  @include primary-gradient
+}
+
+.bg-todo-secondary {
+  @include primary-gradient
 }
 
 .text-bold {
   font-weight: bold;
+}
+
+.bottom-shadow {
+  box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
 }

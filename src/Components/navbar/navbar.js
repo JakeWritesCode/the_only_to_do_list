@@ -5,7 +5,7 @@ import "base.scss"
 
 export default function TodoNavbar(props) {
     return (
-        <Navbar className="bg-todo-primary" expand="lg">
+        <Navbar className="bg-todo-primary bottom-shadow" expand="lg">
             <Container className="w-100">
                 <Navbar.Brand onClick={() => props.homeClick()}>{props.homeText}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
