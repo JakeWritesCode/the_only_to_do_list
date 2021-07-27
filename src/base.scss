@@ -1,0 +1,14 @@
+// Base scss file for the to-do list app
+
+$color-primary: #f857a8;
+$color-secondary: #ff5858;
+
+@mixin main-gradient {
+  background: $color-primary;
+  background: -webkit-linear-gradient(45deg, $color-primary, $color-secondary);
+  background: linear-gradient(45deg, $color-primary, $color-secondary);
+}
+
+.bg-todo-primary {
+  @include main-gradient
+}
