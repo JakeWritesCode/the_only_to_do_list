@@ -20,14 +20,19 @@ export default function HomeSplash(props) {
                     <div className="col-8 vertical-center-parent text-left align-content-center">
                         <div className="vertical-center-child">
                             <div className="row">
-                                <h1 className="splash-title">An average To-Do List App</h1>
+                                <h1 className="splash-title">An Okay To-Do List App</h1>
                             </div>
                             <div className="row">
                                 <h2 className="splash-subtitle">Because I&apos;m all out of original
                                     app ideas...</h2>
                             </div>
                             <div className="row">
-                                <Button className="btn btn-dark">Log in</Button>
+                                <div className="col-6">
+                                    <Button className="btn btn-light w-100">Log in</Button>
+                                </div>
+                                <div className="col-6">
+                                    <Button className="btn btn-dark w-100">Sign Up</Button>
+                                </div>
                             </div>
                         </div>
                     </div>
