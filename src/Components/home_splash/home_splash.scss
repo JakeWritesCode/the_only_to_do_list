@@ -5,6 +5,8 @@
   height: 75vh;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+  position: relative;
+  overflow: hidden;
 }
 
 .vertical-center-parent {
@@ -28,4 +30,21 @@
   font-size: 1.5rem;
   color: white;
   float: right;
+}
+
+.slidey-hidey {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 100%;
+  transition: 1s;
+}
+
+.slidey-showey {
+  transition: 1s;
+  left: 0;
+}
+
+.back-button-clicked {
+  transform: scale(80);
 }
