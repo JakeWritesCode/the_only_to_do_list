@@ -37,12 +37,12 @@ export default function HomeSplash(props) {
                 <div className="h-100" id="splash-title-area">
                     {/* First block with title and buttons */}
                     <div className="row h-100">
-                        <div className="col-4 vertical-center-parent text-center align-content-center">
+                        <div className="col-lg-4 vertical-center-parent text-center align-content-center">
                             <div className="vertical-center-child w-100">
                                 <ListAlt style={{fontSize: 200, color: "white", float: "right"}}/>
                             </div>
                         </div>
-                        <div className="col-8 vertical-center-parent text-left align-content-center">
+                        <div className="col-lg-8 vertical-center-parent text-left align-content-center">
                             <div className="vertical-center-child">
                                 <div className="row">
                                     <h1 className="splash-title">An Okay To-Do List App</h1>
@@ -60,21 +60,41 @@ export default function HomeSplash(props) {
                                         </Button>
                                     </div>
                                     <div className="col-6">
-                                        <Button className="btn btn-dark w-100">Sign Up</Button>
+                                        <Button
+                                            className="btn btn-dark w-100"
+                                            onClick={() => handleNavigate("Sign Up", props.set_active_area_callback)}>
+                                            Sign Up</Button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {/*  Second block (login)  */}
                 <div className="h-100 slidey-hidey bg-todo-primary" id="splash-login-area">
-                    {/*  Second block (login)  */}
                     <div className="row h-100">
                         <div className="col-12">
                             <ArrowBack
                                 style={{fontSize: 70, color: "white", float: "left"}}
                                 onClick={(event) => handleGoBack(event, props.set_active_area_callback)}
                             />
+                        </div>
+                        <div className="row text-center">
+                            <h1>Log In</h1>
+                        </div>
+                    </div>
+                </div>
+                {/*  Third block (signup)  */}
+                <div className="h-100 slidey-hidey bg-todo-primary" id="splash-signup-area">
+                    <div className="row h-100">
+                        <div className="col-12">
+                            <ArrowBack
+                                style={{fontSize: 70, color: "white", float: "left"}}
+                                onClick={(event) => handleGoBack(event, props.set_active_area_callback)}
+                            />
+                        </div>
+                        <div className="row text-center">
+                            <h1>Sign Up</h1>
                         </div>
                     </div>
                 </div>
