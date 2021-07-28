@@ -46,6 +46,7 @@ export default class App extends React.Component {
                 <TodoNavbar homeText="Jakes To-Do List" buttons={this.navBarButtons()}/>
                 <HomeSplash
                     set_active_area_callback={(active_area) => this.setState({"active_area": active_area})}
+                    active_area={this.state.active_area}
                 />
             </div>
         )

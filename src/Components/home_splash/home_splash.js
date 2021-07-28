@@ -71,7 +71,8 @@ export default function HomeSplash(props) {
                     </div>
                 </div>
                 {/*  Second block (login)  */}
-                <div className="h-100 slidey-hidey bg-todo-primary" id="splash-login-area">
+                <div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Log In / Out" ? " slidey-showey": "")}
+                     id="splash-login-area">
                     <div className="row h-100">
                         <div className="col-12">
                             <ArrowBack
@@ -86,7 +87,8 @@ export default function HomeSplash(props) {
                     </div>
                 </div>
                 {/*  Third block (signup)  */}
-                <div className="h-100 slidey-hidey bg-todo-primary" id="splash-signup-area">
+                <div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Sign Up" ? " slidey-showey": "")}
+                     id="splash-signup-area">
                     <div className="row h-100">
                         <div className="col-12">
                             <ArrowBack

@@ -21,6 +21,18 @@ describe("The HomeSplash component", () => {
         expect(screen.getByText("Sign Up", {selector: "button"})).toBeVisible()
     })
 
+    test("should load with the log in page visible if active_area = Log In / Out is passed as props", () => {
+        const active_area_callback = jest.fn()
+        render(<HomeSplash active_area={"Log In / Out"} set_active_area_callback={active_area_callback}/>)
+        expect(screen.getByTestId("splash-login-area").className).toContain("slidey-showey")
+    })
+
+    test("should load with the sign up page visible if active_area = Sign Up is passed as props", () => {
+        const active_area_callback = jest.fn()
+        render(<HomeSplash active_area={"Sign Up"} set_active_area_callback={active_area_callback}/>)
+        expect(screen.getByTestId("splash-signup-area").className).toContain("slidey-showey")
+    })
+
     describe("when clicking the log in button", () => {
         test("should add the slidey-showey class name to the splash-login-area", () => {
             const active_area_callback = jest.fn()
