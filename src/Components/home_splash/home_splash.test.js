@@ -58,4 +58,54 @@ describe("The HomeSplash component", () => {
             expect(active_area_callback.mock.calls[0][0]).toBe("Sign Up")
         })
     })
+
+    describe("when clicking the back button on the log in page", () => {
+        test("the slidey-showey class should be removed from all elements", () => {
+            const active_area_callback = jest.fn()
+            render(<HomeSplash active_area={"Home"} set_active_area_callback={active_area_callback}/>)
+            userEvent.click(screen.getByText("Login", {selector: "button"}))
+            expect(screen.getByTestId("splash-login-area").className).toContain("slidey-showey")
+            userEvent.click(screen.getByTestId("login-go-back"))
+
+            expect(screen.getByTestId("splash-login-area").className).not.toContain("slidey-showey")
+        })
+
+        test("should call the callback function with the correct active_area", () => {
+            const active_area_callback = jest.fn()
+            render(<HomeSplash active_area={"Home"} set_active_area_callback={active_area_callback}/>)
+            userEvent.click(screen.getByText("Login", {selector: "button"}))
+            expect(screen.getByTestId("splash-login-area").className).toContain("slidey-showey")
+
+            active_area_callback.mockReset()
+            userEvent.click(screen.getByTestId("login-go-back"))
+
+            expect(active_area_callback.mock.calls.length).toBe(1)
+            expect(active_area_callback.mock.calls[0][0]).toBe("Home")
+        })
+    })
+
+    describe("when clicking the back button on the sign up page", () => {
+        test("the slidey-showey class should be removed from all elements", () => {
+            const active_area_callback = jest.fn()
+            render(<HomeSplash active_area={"Home"} set_active_area_callback={active_area_callback}/>)
+            userEvent.click(screen.getByText("Sign Up", {selector: "button"}))
+            expect(screen.getByTestId("splash-signup-area").className).toContain("slidey-showey")
+            userEvent.click(screen.getByTestId("signup-go-back"))
+
+            expect(screen.getByTestId("splash-signup-area").className).not.toContain("slidey-showey")
+        })
+
+        test("should call the callback function with the correct active_area", () => {
+            const active_area_callback = jest.fn()
+            render(<HomeSplash active_area={"Home"} set_active_area_callback={active_area_callback}/>)
+            userEvent.click(screen.getByText("Sign Up", {selector: "button"}))
+            expect(screen.getByTestId("splash-signup-area").className).toContain("slidey-showey")
+
+            active_area_callback.mockReset()
+            userEvent.click(screen.getByTestId("signup-go-back"))
+
+            expect(active_area_callback.mock.calls.length).toBe(1)
+            expect(active_area_callback.mock.calls[0][0]).toBe("Home")
+        })
+    })
 })

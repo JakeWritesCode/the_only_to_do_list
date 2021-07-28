@@ -77,6 +77,7 @@ export default function HomeSplash(props) {
                             <ArrowBack
                                 style={{fontSize: 70, color: "white", float: "left"}}
                                 onClick={(event) => handleGoBack(event, props.set_active_area_callback)}
+                                id="login-go-back"
                             />
                         </div>
                         <div className="row text-center">
@@ -91,6 +92,7 @@ export default function HomeSplash(props) {
                             <ArrowBack
                                 style={{fontSize: 70, color: "white", float: "left"}}
                                 onClick={(event) => handleGoBack(event, props.set_active_area_callback)}
+                                id="signup-go-back"
                             />
                         </div>
                         <div className="row text-center">
