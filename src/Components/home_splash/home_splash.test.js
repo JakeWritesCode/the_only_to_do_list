@@ -59,8 +59,7 @@ describe("The HomeSplash component", () => {
     describe("when clicking the back button on the log in page", () => {
         test("should call the callback function with the correct active_area", () => {
             const active_area_callback = jest.fn()
-            render(<HomeSplash active_area={"Home"} set_active_area_callback={active_area_callback}/>)
-            userEvent.click(screen.getByText("Login", {selector: "button"}))
+            render(<HomeSplash active_area={"Log In / Out"} set_active_area_callback={active_area_callback}/>)
             expect(screen.getByTestId("splash-login-area").className).toContain("slidey-showey")
 
             active_area_callback.mockReset()
@@ -74,8 +73,7 @@ describe("The HomeSplash component", () => {
     describe("when clicking the back button on the sign up page", () => {
         test("should call the callback function with the correct active_area", () => {
             const active_area_callback = jest.fn()
-            render(<HomeSplash active_area={"Home"} set_active_area_callback={active_area_callback}/>)
-            userEvent.click(screen.getByText("Sign Up", {selector: "button"}))
+            render(<HomeSplash active_area={"Sign Up"} set_active_area_callback={active_area_callback}/>)
             expect(screen.getByTestId("splash-signup-area").className).toContain("slidey-showey")
 
             active_area_callback.mockReset()
