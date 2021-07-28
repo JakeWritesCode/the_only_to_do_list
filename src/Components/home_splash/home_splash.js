@@ -7,29 +7,6 @@ import {Button} from "react-bootstrap";
 import {ListAlt, ArrowBack} from "@material-ui/icons";
 
 
-function handleNavigate(active_area, set_active_area_callback) {
-    // This sets the slide in for the new area before calling
-    // the props specified callback function
-    if (active_area === "Log In / Out") {
-        document.getElementById("splash-login-area").className += " slidey-showey"
-    }
-    if (active_area === "Sign Up") {
-        document.getElementById("splash-signup-area").className += " slidey-showey"
-    }
-    set_active_area_callback(active_area)
-}
-
-function handleGoBack(event, set_active_area_callback) {
-    // Back for this screen is always back to the splash
-    // so just get rid of all the slidey-showeys
-    // There should only be one, but loop em anyway
-    set_active_area_callback("Home")
-    const elements = document.getElementsByClassName("slidey-showey")
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].className = elements[i].className.replace(" slidey-showey", "")
-    }
-}
-
 export default function HomeSplash(props) {
     return (
         <div className="splash-container">
@@ -55,14 +32,14 @@ export default function HomeSplash(props) {
                                     <div className="col-6">
                                         <Button
                                             className="btn btn-light w-100"
-                                            onClick={() => handleNavigate("Log In / Out", props.set_active_area_callback)}>
+                                            onClick={() => props.set_active_area_callback("Log In / Out")}>
                                             Login
                                         </Button>
                                     </div>
                                     <div className="col-6">
                                         <Button
                                             className="btn btn-dark w-100"
-                                            onClick={() => handleNavigate("Sign Up", props.set_active_area_callback)}>
+                                            onClick={() => props.set_active_area_callback("Sign Up")}>
                                             Sign Up</Button>
                                     </div>
                                 </div>
@@ -77,7 +54,7 @@ export default function HomeSplash(props) {
                         <div className="col-12">
                             <ArrowBack
                                 style={{fontSize: 70, color: "white", float: "left"}}
-                                onClick={(event) => handleGoBack(event, props.set_active_area_callback)}
+                                onClick={() => props.set_active_area_callback("Home")}
                                 id="login-go-back"
                             />
                         </div>
@@ -93,7 +70,7 @@ export default function HomeSplash(props) {
                         <div className="col-12">
                             <ArrowBack
                                 style={{fontSize: 70, color: "white", float: "left"}}
-                                onClick={(event) => handleGoBack(event, props.set_active_area_callback)}
+                                onClick={() => props.set_active_area_callback("Home")}
                                 id="signup-go-back"
                             />
                         </div>
