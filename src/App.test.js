@@ -1,10 +1,11 @@
 //Tests for the SplashScreen component.
 
-import HomeSplash from "./home_splash";
 import {render, screen} from "@testing-library/react";
 import React from "react";
 import userEvent from '@testing-library/user-event'
 import {configure} from '@testing-library/react'
+import App from "./App"
+import TodoNavbar from "./Components/navbar/navbar"
 
 // screen.getByTestID now queries for ID, because no ID support out of the box.
 // heres why:
@@ -14,7 +15,10 @@ configure({testIdAttribute: 'id'})
 
 
 describe("The App component", () => {
-    test("should call ", () => {
-        console.log("I havent written this yet..")
+    test("should call to TodoNavbar with the correct buttons", () => {
+        const mock_nav = jest.spyOn(navbar, Todo)
+        jest.mock("./Components/navbar/navbar.js")
+        render(<App/>)
+        expect(TodoNavbar).toHaveBeenCalledWith()x, y ,z
     })
 })

@@ -5,9 +5,12 @@ import PropTypes from 'prop-types';
 import "./home_splash.scss"
 import {Button} from "react-bootstrap";
 import {ListAlt, ArrowBack} from "@material-ui/icons";
+import {useHistory} from "react-router-dom";
 
 
 export default function HomeSplash(props) {
+    const history = useHistory()
+
     return (
         <div className="splash-container">
             <div className="home-splash-div">
@@ -32,14 +35,14 @@ export default function HomeSplash(props) {
                                     <div className="col-6">
                                         <Button
                                             className="btn btn-light w-100"
-                                            onClick={() => props.set_active_area_callback("Log In / Out")}>
+                                            onClick={() => history.push("/login")}>
                                             Login
                                         </Button>
                                     </div>
                                     <div className="col-6">
                                         <Button
                                             className="btn btn-dark w-100"
-                                            onClick={() => props.set_active_area_callback("Sign Up")}>
+                                            onClick={() => history.push("sign-up")}>
                                             Sign Up</Button>
                                     </div>
                                 </div>
@@ -48,37 +51,37 @@ export default function HomeSplash(props) {
                     </div>
                 </div>
                 {/*  Second block (login)  */}
-                <div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Log In / Out" ? " slidey-showey": "")}
-                     id="splash-login-area">
-                    <div className="row h-100">
-                        <div className="col-12">
-                            <ArrowBack
-                                style={{fontSize: 70, color: "white", float: "left"}}
-                                onClick={() => props.set_active_area_callback("Home")}
-                                id="login-go-back"
-                            />
-                        </div>
-                        <div className="row text-center">
-                            <h1>Log In</h1>
-                        </div>
-                    </div>
-                </div>
-                {/*  Third block (signup)  */}
-                <div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Sign Up" ? " slidey-showey": "")}
-                     id="splash-signup-area">
-                    <div className="row h-100">
-                        <div className="col-12">
-                            <ArrowBack
-                                style={{fontSize: 70, color: "white", float: "left"}}
-                                onClick={() => props.set_active_area_callback("Home")}
-                                id="signup-go-back"
-                            />
-                        </div>
-                        <div className="row text-center">
-                            <h1>Sign Up</h1>
-                        </div>
-                    </div>
-                </div>
+                {/*<div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Log In / Out" ? " slidey-showey": "")}*/}
+                {/*     id="splash-login-area">*/}
+                {/*    <div className="row h-100">*/}
+                {/*        <div className="col-12">*/}
+                {/*            <ArrowBack*/}
+                {/*                style={{fontSize: 70, color: "white", float: "left"}}*/}
+                {/*                onClick={() => props.set_active_area_callback("Home")}*/}
+                {/*                id="login-go-back"*/}
+                {/*            />*/}
+                {/*        </div>*/}
+                {/*        <div className="row text-center">*/}
+                {/*            <h1>Log In</h1>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*/!*  Third block (signup)  *!/*/}
+                {/*<div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Sign Up" ? " slidey-showey": "")}*/}
+                {/*     id="splash-signup-area">*/}
+                {/*    <div className="row h-100">*/}
+                {/*        <div className="col-12">*/}
+                {/*            <ArrowBack*/}
+                {/*                style={{fontSize: 70, color: "white", float: "left"}}*/}
+                {/*                onClick={() => props.set_active_area_callback("Home")}*/}
+                {/*                id="signup-go-back"*/}
+                {/*            />*/}
+                {/*        </div>*/}
+                {/*        <div className="row text-center">*/}
+                {/*            <h1>Sign Up</h1>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
 
         </div>

@@ -2,6 +2,12 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import TodoNavbar from "./Components/navbar/navbar";
+// import HomeSplash from "./Components/home_splash/home_splash";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
 import HomeSplash from "./Components/home_splash/home_splash";
 
 export default class App extends React.Component {
@@ -9,7 +15,6 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             "logged_in": false,
-            "active_area": "Home"
         }
     }
 
@@ -18,23 +23,19 @@ export default class App extends React.Component {
             [
                 {
                     "text": "Home",
-                    "onClick": () => this.setState({"active_area": "Home"}),
-                    "active": this.state.active_area === "Home"
+                    "route": "/"
                 },
                 {
                     "text": this.state.logged_in ? "Log Out" : "Log In",
-                    "onClick": () => this.setState({"active_area": "Log In / Out"}),
-                    "active": this.state.active_area === "Log In / Out"
+                    "route": "/login"
                 },
                 {
                     "text": "To-Do List",
-                    "onClick": () => this.setState({"active_area": "To-Do List"}),
-                    "active": this.state.active_area === "To-Do List"
+                    "route": "/todo"
                 },
                 {
                     "text": "Reminders",
-                    "onClick": () => this.setState({"active_area": "Reminders"}),
-                    "active": this.state.active_area === "Reminders"
+                    "route": "/reminders"
                 }
             ]
         )
@@ -42,13 +43,30 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <TodoNavbar homeText="Jakes To-Do List" buttons={this.navBarButtons()}/>
-                <HomeSplash
-                    set_active_area_callback={(active_area) => this.setState({"active_area": active_area})}
-                    active_area={this.state.active_area}
-                />
-            </div>
+            <Router>
+                <div>
+                    <TodoNavbar homeText={"Hello"} buttons={this.navBarButtons()}/>
+                    {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                    <Switch>
+                        <Route path="/todo">
+                            <h1>Todo</h1>
+                        </Route>
+                        <Route path="/reminders">
+                            <h1>Reminders</h1>
+                        </Route>
+                        <Route path="/login">
+                            <h1>Login</h1>
+                        </Route>
+                        <Route path="/sign-up">
+                            <h1>Signup</h1>
+                        </Route>
+                        <Route path="/">
+                            <HomeSplash/>
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
         )
     }
 }
