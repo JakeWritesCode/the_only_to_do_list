@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import "./signup.scss"
+import "../screens_common.scss"
 import {ArrowBack} from "@material-ui/icons";
 import {useHistory} from "react-router-dom";
 
@@ -11,7 +11,7 @@ export default function SignupScreen(props) {
     const history = useHistory()
 
     return (
-        <div className="splash-container">
+        <div className="page-container page">
             <div className="home-splash-div">
                 <div
                     className="h-100 bg-todo-primary"

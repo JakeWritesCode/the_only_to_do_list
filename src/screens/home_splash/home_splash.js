@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import "./home_splash.scss"
+import "../screens_common.scss"
 import {Button} from "react-bootstrap";
 import {ListAlt, ArrowBack} from "@material-ui/icons";
 import {useHistory} from "react-router-dom";
@@ -12,7 +12,7 @@ export default function HomeSplash(props) {
     const history = useHistory()
 
     return (
-        <div className="splash-container">
+        <div className="page-container page">
             <div className="home-splash-div">
                 <div className="h-100" id="splash-title-area">
                     {/* First block with title and buttons */}

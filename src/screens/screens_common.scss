@@ -1,4 +1,4 @@
-@import "../../base";
+@import "../base";
 
 .home-splash-div {
   @include primary-gradient;
@@ -30,19 +30,6 @@
   font-size: 1.5rem;
   color: white;
   float: right;
-}
-
-.slidey-hidey {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  width: 100%;
-  transition: 1s;
-}
-
-.slidey-showey {
-  transition: 1s;
-  left: 0;
 }
 
 .back-button-clicked {

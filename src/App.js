@@ -1,4 +1,3 @@
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import TodoNavbar from "./Components/navbar/navbar";
@@ -18,7 +17,7 @@ import {
 import LoginScreen from "./screens/login/login";
 import SignupScreen from "./screens/signup/signup";
 
-export default class App extends React.Component {
+class App extends React.Component {
     static propTypes = {
         match: PropTypes.object.isRequired,
         location: PropTypes.object.isRequired,
@@ -28,7 +27,8 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            "logged_in": false,
+            logged_in: false,
+            prevDepth: this.getPathDepth(this.props.location)
         }
     }
 
@@ -55,21 +55,34 @@ export default class App extends React.Component {
         )
     }
 
+    getPathDepth(location) {
+        let pathArr = location.pathname.split("/");
+        pathArr = pathArr.filter(n => n !== "");
+        return pathArr.length;
+    }
+
     render() {
         const {location} = this.props;
+        const currentKey = location.pathname.split("/")[1] || "/";
+        //Specify the duration of the animation (on enter and on exit)
+        const timeout = {enter: 500, exit: 500};
 
         return (
-            <Router>
-                <div>
-                    <TodoNavbar homeText={"Hello"} buttons={this.navBarButtons()}/>
-                    <TransitionGroup>
-                        <CSSTransition
-                            key={currentKey}
-                            timeout={timeout}
-                            classNames="pageSlider"
-                            mountOnEnter={false}
-                            unmountOnExit={true}
-                        >
+            <div>
+                <TodoNavbar homeText={"Hello"} buttons={this.navBarButtons()}/>
+                <TransitionGroup component="div" className="TransitionBox">
+                    <CSSTransition
+                        key={currentKey}
+                        timeout={timeout}
+                        classNames="page-slider"
+                        mountOnEnter={false}
+                        unmountOnExit={true}
+                    >
+                        <div className={
+                            this.getPathDepth(location) - this.state.prevDepth >= 0
+                                ? "left"
+                                : "right"
+                        }>
                             <Switch location={location}>
                                 <Route path="/todo">
                                     <h1>Todo</h1>
@@ -87,10 +100,12 @@ export default class App extends React.Component {
                                     <HomeSplash/>
                                 </Route>
                             </Switch>
-                        </CSSTransition>
-                    </TransitionGroup>
-                </div>
-            </Router>
+                        </div>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
         )
     }
 }
+
+export default withRouter(App)
