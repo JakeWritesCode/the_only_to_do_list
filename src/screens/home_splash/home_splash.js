@@ -50,40 +50,7 @@ export default function HomeSplash(props) {
                         </div>
                     </div>
                 </div>
-                {/*  Second block (login)  */}
-                {/*<div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Log In / Out" ? " slidey-showey": "")}*/}
-                {/*     id="splash-login-area">*/}
-                {/*    <div className="row h-100">*/}
-                {/*        <div className="col-12">*/}
-                {/*            <ArrowBack*/}
-                {/*                style={{fontSize: 70, color: "white", float: "left"}}*/}
-                {/*                onClick={() => props.set_active_area_callback("Home")}*/}
-                {/*                id="login-go-back"*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*        <div className="row text-center">*/}
-                {/*            <h1>Log In</h1>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
-                {/*/!*  Third block (signup)  *!/*/}
-                {/*<div className={"h-100 slidey-hidey bg-todo-primary" + (props.active_area === "Sign Up" ? " slidey-showey": "")}*/}
-                {/*     id="splash-signup-area">*/}
-                {/*    <div className="row h-100">*/}
-                {/*        <div className="col-12">*/}
-                {/*            <ArrowBack*/}
-                {/*                style={{fontSize: 70, color: "white", float: "left"}}*/}
-                {/*                onClick={() => props.set_active_area_callback("Home")}*/}
-                {/*                id="signup-go-back"*/}
-                {/*            />*/}
-                {/*        </div>*/}
-                {/*        <div className="row text-center">*/}
-                {/*            <h1>Sign Up</h1>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
-
         </div>
     )
 }

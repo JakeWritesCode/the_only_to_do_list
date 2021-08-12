@@ -2,15 +2,29 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import TodoNavbar from "./Components/navbar/navbar";
-// import HomeSplash from "./Components/home_splash/home_splash";
+import HomeSplash from "./screens/home_splash/home_splash";
+import {PropTypes} from "prop-types";
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    useLocation,
+    withRouter
 } from "react-router-dom";
-import HomeSplash from "./Components/home_splash/home_splash";
+import {
+    TransitionGroup,
+    CSSTransition
+} from "react-transition-group";
+import LoginScreen from "./screens/login/login";
+import SignupScreen from "./screens/signup/signup";
 
 export default class App extends React.Component {
+    static propTypes = {
+        match: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -42,29 +56,39 @@ export default class App extends React.Component {
     }
 
     render() {
+        const {location} = this.props;
+
         return (
             <Router>
                 <div>
                     <TodoNavbar homeText={"Hello"} buttons={this.navBarButtons()}/>
-                    {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-                    <Switch>
-                        <Route path="/todo">
-                            <h1>Todo</h1>
-                        </Route>
-                        <Route path="/reminders">
-                            <h1>Reminders</h1>
-                        </Route>
-                        <Route path="/login">
-                            <h1>Login</h1>
-                        </Route>
-                        <Route path="/sign-up">
-                            <h1>Signup</h1>
-                        </Route>
-                        <Route path="/">
-                            <HomeSplash/>
-                        </Route>
-                    </Switch>
+                    <TransitionGroup>
+                        <CSSTransition
+                            key={currentKey}
+                            timeout={timeout}
+                            classNames="pageSlider"
+                            mountOnEnter={false}
+                            unmountOnExit={true}
+                        >
+                            <Switch location={location}>
+                                <Route path="/todo">
+                                    <h1>Todo</h1>
+                                </Route>
+                                <Route path="/reminders">
+                                    <h1>Reminders</h1>
+                                </Route>
+                                <Route path="/login">
+                                    <LoginScreen/>
+                                </Route>
+                                <Route path="/sign-up">
+                                    <SignupScreen/>
+                                </Route>
+                                <Route path="/">
+                                    <HomeSplash/>
+                                </Route>
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </div>
             </Router>
         )
