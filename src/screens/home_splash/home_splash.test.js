@@ -44,6 +44,6 @@ describe("The HomeSplash component", () => {
         userEvent.click(screen.getByText("Sign Up", {selector: "button"}))
 
         expect(mockPush).toHaveBeenCalledTimes(1)
-        expect(mockPush).toHaveBeenCalledWith("/sign-up")
+        expect(mockPush).toHaveBeenCalledWith("sign-up")
     })
 })
