@@ -54,8 +54,3 @@ export default function HomeSplash(props) {
         </div>
     )
 }
-
-HomeSplash.propTypes = {
-    active_area: PropTypes.string.isRequired,
-    set_active_area_callback: PropTypes.func.isRequired,
-}

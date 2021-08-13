@@ -16,9 +16,8 @@ configure({testIdAttribute: 'id'})
 
 describe("The App component", () => {
     test("should call to TodoNavbar with the correct buttons", () => {
-        const mock_nav = jest.spyOn(navbar, Todo)
         jest.mock("./Components/navbar/navbar.js")
         render(<App/>)
-        expect(TodoNavbar).toHaveBeenCalledWith()x, y ,z
+        expect(TodoNavbar.mock).toHaveBeenCalledWith()
     })
 })
