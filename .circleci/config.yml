@@ -27,7 +27,7 @@ jobs:
       - node/install-packages
       - run:
           name: Run tests
-          command: npm test
+          command: CI=True npm test --coverage && codecov
 
 workflows:
   # Below is the definition of your workflow.
