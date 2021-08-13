@@ -4,63 +4,64 @@ import TodoNavbar from "./navbar";
 import {render, screen} from "@testing-library/react";
 import React from "react";
 import userEvent from '@testing-library/user-event'
+import {useHistory, useLocation} from "react-router-dom";
+
+// Mock the useLocation hook
+const mockPush = jest.fn()
+jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useLocation: () => ({
+        pathname: "/hello",
+    }),
+    useHistory: () => ({
+        push: mockPush
+    })
+}));
 
 describe("The navbar component", () => {
     test("renders one button for each item in buttons array", () => {
         const buttons = [
             {
                 "text": "Button 1",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/"
             },
             {
                 "text": "Button 2",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/hello"
             },
             {
                 "text": "Button 3",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/goodbye"
             },
-
         ]
 
-        render(<TodoNavbar buttons={buttons} homeText="Hello"/>)
-        const found_buttons = screen.getAllByRole("button")
-        expect(found_buttons.length).toBe(4)
+        const component = render(<TodoNavbar buttons={buttons} homeText="Hello"/>)
+        const found_buttons = component.container.querySelectorAll("[id*='nav-link']")
 
-        // The blank is for the burger button
-        const expected_texts = ["", "Button 1", "Button 2", "Button 3"]
+        expect(found_buttons.length).toBe(3)
+
+        const expected_texts = ["Button 1", "Button 2", "Button 3"]
         for (let i = 0; i < found_buttons.length; i++) {
             expect(expected_texts).toContain(found_buttons[i].textContent)
         }
     })
 
-    test("renders active: true component with text-bold class", () => {
+    test("shows exactly one link as bold which matches the current " +
+        "route provided by location.pathname from react-router", () => {
+
         const buttons = [
             {
                 "text": "Button 1",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/"
             },
             {
                 "text": "Button 2",
-                "onClick": () => {
-                },
-                "active": true
+                "route": "/hello"
             },
             {
                 "text": "Button 3",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/goodbye"
             },
-
         ]
 
         render(<TodoNavbar buttons={buttons}/>)
@@ -69,34 +70,29 @@ describe("The navbar component", () => {
         expect(screen.getByText("Button 3").className).not.toContain("text-bold")
     })
 
-    test("calls the specified callback function when a button is pressed", () => {
-        const click_mock = jest.fn()
+    test("pushes the given route to the history hook when a nav button is pressed", () => {
         const buttons = [
             {
                 "text": "Button 1",
-                "onClick": click_mock,
-                "active": false
+                "route": "/test",
             },
         ]
 
         render(<TodoNavbar buttons={buttons}/>)
         userEvent.click(screen.getByText("Button 1"))
-        expect(click_mock.mock.calls.length).toBe(1)
+        expect(mockPush).toHaveBeenCalledTimes(1)
+        expect(mockPush).toHaveBeenCalledWith("/test")
     })
 
     test("gives each button an id according to its index", () => {
         const buttons = [
             {
                 "text": "Button 1",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/"
             },
             {
                 "text": "Button 1",
-                "onClick": () => {
-                },
-                "active": false
+                "route": "/hello"
             },
         ]
 
@@ -104,5 +100,14 @@ describe("The navbar component", () => {
         for (let i = 0; i < 2; i++) {
             expect(result.container.querySelector("#nav-link-" + i)).toBeTruthy()
         }
+    })
+
+    test("displays the homeText prop as a navbar-brand link and links to the homepage", () => {
+        const component = render(<TodoNavbar buttons={[]} homeText="Hello"/>)
+        const homelink = component.container.querySelector("[class*='navbar-brand']")
+
+        expect(homelink.textContent).toBe("Hello")
+        userEvent.click(homelink)
+        expect(mockPush).toHaveBeenCalledWith("/")
     })
 })
