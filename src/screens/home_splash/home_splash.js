@@ -1,10 +1,9 @@
 // The home splash funky bit
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import "../screens_common.scss"
 import {Button} from "react-bootstrap";
-import {ListAlt, ArrowBack} from "@material-ui/icons";
+import {ListAlt} from "@material-ui/icons";
 import {useHistory} from "react-router-dom";
 
 

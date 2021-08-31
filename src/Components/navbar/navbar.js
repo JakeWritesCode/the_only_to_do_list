@@ -37,7 +37,7 @@ export default function TodoNavbar(props) {
 
 TodoNavbar.propTypes = {
     homeClick: PropTypes.string,
-    homeText: PropTypes.string.isRequired,
+    homeText: PropTypes.string,
     buttons: PropTypes.array.isRequired,
     navLinkClick: PropTypes.func
 }
