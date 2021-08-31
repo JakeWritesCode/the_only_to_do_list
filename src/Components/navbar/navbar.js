@@ -23,7 +23,7 @@ export default function TodoNavbar(props) {
                             <Nav.Link key={index}
                                       onClick={() => history.push(button.route)}
                                       id={"nav-link-" + index}
-                                      className={"nav-item " + (location.pathname === button.route) ? "text-bold" : ""}
+                                      className={"nav-item" + button.route === location.pathname ? " text-bold" : ""}
                             >
                                 {button.text}
                             </Nav.Link>
