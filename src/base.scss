@@ -1,18 +1,109 @@
 // Base scss file for the to-do list app
 
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+body {
+  font-family: 'Cabin', sans-serif;
+}
+
 $color-primary: #f857a8;
 $color-secondary: #ff5858;
+$color-tertiary: #ff1717;
+$color-contrast: #188bff;
 
-@mixin main-gradient {
+@mixin primary-gradient {
   background: $color-primary;
   background: -webkit-linear-gradient(45deg, $color-primary, $color-secondary);
   background: linear-gradient(45deg, $color-primary, $color-secondary);
 }
 
+@mixin navbar-gradient {
+  background: rgba(255, 0, 0, 0);
+  background: -webkit-linear-gradient(45deg, #ffffff, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0));
+  background: linear-gradient(45deg, #ffffff, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0));
+}
+
+@mixin secondary-gradient {
+  background: $color-secondary;
+  background: -webkit-linear-gradient(45deg, $color-secondary, $color-tertiary);
+  background: linear-gradient(45deg, $color-secondary, $color-tertiary);
+}
+
 .bg-todo-primary {
-  @include main-gradient
+  @include primary-gradient
+}
+
+.navbar-bg {
+  @include navbar-gradient
+}
+
+.bg-todo-secondary {
+  @include primary-gradient
 }
 
 .text-bold {
   font-weight: bold;
+}
+
+.bottom-shadow {
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
+}
+
+$transition-time: 0.5s;
+
+.page-slider {
+  position: absolute;
+  width: 100%;
+}
+
+.page-container {
+  position: absolute;
+}
+
+.page {
+  width: 100%;
+}
+
+//old page exiting, hides it underneath (bottom)
+.page-slider-exit > .page {
+  z-index: 1;
+}
+
+.page-slider-enter > .page {
+  z-index: 10;
+}
+
+.page-slider-exit-active {
+  z-index: 1;
+}
+
+//new page entering, show it on top
+.page-slider-enter-active {
+  z-index: 10;
+}
+
+//LEFT transition transform 100% to the right
+.page-slider-enter.left > .page {
+  transform: translate3d(100%, 0, 0);
+}
+
+//RIGHT transition transform -100% to the left
+.page-slider-enter.right > .page {
+  transform: translate3d(-100%, 0, 0);
+}
+
+//old exit left direction
+.page-slider-exit.left > .page {
+}
+
+//old exit right direction
+.page-slider-exit.right > .page {
+}
+
+//Enter is active (Page has finished transitioning) make it settle down
+.page-slider-enter.page-slider-enter-active > .page {
+  //Apply all transitions
+  transform: translate3d(0, 0, 0);
+  transition: all $transition-time ease-in-out;
 }

@@ -1,0 +1,37 @@
+@import "../base";
+
+.home-splash-div {
+  @include primary-gradient;
+  height: 75vh;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+  position: relative;
+  overflow: hidden;
+}
+
+.vertical-center-parent {
+  position: relative;
+}
+
+.vertical-center-child {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.splash-title {
+  font-weight: bold;
+  font-size: 3rem;
+  color: white;
+  float: right;
+}
+
+.splash-subtitle {
+  font-size: 1.5rem;
+  color: white;
+  float: right;
+}
+
+.back-button-clicked {
+  transform: scale(80);
+}
