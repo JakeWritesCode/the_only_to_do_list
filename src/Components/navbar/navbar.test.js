@@ -1,10 +1,11 @@
 //Tests for the TodoNavbar component.
 
 import TodoNavbar from "./navbar";
-import {render, screen} from "@testing-library/react";
+import {configure, render, screen} from "@testing-library/react";
 import React from "react";
 import userEvent from '@testing-library/user-event'
-import {useHistory, useLocation} from "react-router-dom";
+
+configure({testIdAttribute: 'id'})
 
 // Mock the useLocation hook
 const mockPush = jest.fn()
@@ -44,30 +45,6 @@ describe("The navbar component", () => {
         for (let i = 0; i < found_buttons.length; i++) {
             expect(expected_texts).toContain(found_buttons[i].textContent)
         }
-    })
-
-    test("shows exactly one link as bold which matches the current " +
-        "route provided by location.pathname from react-router", () => {
-
-        const buttons = [
-            {
-                "text": "Button 1",
-                "route": "/"
-            },
-            {
-                "text": "Button 2",
-                "route": "/hello"
-            },
-            {
-                "text": "Button 3",
-                "route": "/goodbye"
-            },
-        ]
-
-        render(<TodoNavbar buttons={buttons}/>)
-        expect(screen.getByText("Button 1").className).not.toContain("text-bold")
-        expect(screen.getByText("Button 2").className).toContain("text-bold")
-        expect(screen.getByText("Button 3").className).not.toContain("text-bold")
     })
 
     test("pushes the given route to the history hook when a nav button is pressed", () => {

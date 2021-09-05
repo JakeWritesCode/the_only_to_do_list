@@ -18,6 +18,12 @@ $color-contrast: #188bff;
   background: linear-gradient(45deg, $color-primary, $color-secondary);
 }
 
+@mixin navbar-gradient {
+  background: rgba(255, 0, 0, 0);
+  background: -webkit-linear-gradient(45deg, #ffffff, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0));
+  background: linear-gradient(45deg, #ffffff, rgba(255, 0, 0, 0), rgba(255, 0, 0, 0));
+}
+
 @mixin secondary-gradient {
   background: $color-secondary;
   background: -webkit-linear-gradient(45deg, $color-secondary, $color-tertiary);
@@ -26,6 +32,10 @@ $color-contrast: #188bff;
 
 .bg-todo-primary {
   @include primary-gradient
+}
+
+.navbar-bg {
+  @include navbar-gradient
 }
 
 .bg-todo-secondary {

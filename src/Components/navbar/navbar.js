@@ -13,7 +13,8 @@ export default function TodoNavbar(props) {
     const history = useHistory()
 
     return (
-        <Navbar className="bg-todo-primary bottom-shadow" expand="lg">
+        <div className="bg-todo-primary">
+        <Navbar className="navbar-bg bottom-shadow" expand="lg">
             <Container className="w-100">
                 <Navbar.Brand onClick={() => history.push("/")}>{props.homeText}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -23,6 +24,7 @@ export default function TodoNavbar(props) {
                             <Nav.Link key={index}
                                       onClick={() => history.push(button.route)}
                                       id={"nav-link-" + index}
+                                      noodler={location.pathname + button.route}
                                       className={"nav-item" + button.route === location.pathname ? " text-bold" : ""}
                             >
                                 {button.text}
@@ -32,6 +34,7 @@ export default function TodoNavbar(props) {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+            </div>
     )
 }
 

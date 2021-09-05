@@ -7,7 +7,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useLocation,
     withRouter
 } from "react-router-dom";
 import {
@@ -69,7 +68,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <TodoNavbar homeText={"Hello"} buttons={this.navBarButtons()}/>
+                <TodoNavbar homeText={"Appy Face"} buttons={this.navBarButtons()}/>
                 <TransitionGroup component="div" className="TransitionBox">
                     <CSSTransition
                         key={currentKey}
