@@ -4,7 +4,6 @@ import TodoNavbar from "./Components/navbar/navbar";
 import HomeSplash from "./screens/home_splash/home_splash";
 import {PropTypes} from "prop-types";
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     withRouter
