@@ -119,3 +119,9 @@ $transition-time: 0.5s;
   @include primary-gradient;
   border: $color-primary;
 }
+
+.form-error {
+  font-size: 0.8rem;
+  color: #be2424;
+  font-weight: bold;
+}
