@@ -2,29 +2,34 @@ import React from 'react';
 import "../screens_common.scss"
 import {ArrowBack} from "@material-ui/icons";
 import {useHistory} from "react-router-dom";
-import {Card, Button, Form} from "react-bootstrap"
+import {Card, Button, Form, Row, Col} from "react-bootstrap"
 import {Formik, Field} from 'formik';
+import {useMutation} from "react-query";
+import {createUserAccount} from "api/accounts"
 
 const SignUpForm = () => {
     const history = useHistory()
+
+    const signUpMutation = useMutation(validatedFormData => createUserAccount(validatedFormData))
+
     return (
         <Formik
             initialValues={{
                 email: "",
-                firstName: '',
-                lastName: '',
+                first_name: '',
+                last_name: '',
                 password: "",
                 passwordConfirm: ""
             }}
             validateOnChange={true}
             validate={(values) => {
                 let errors = {};
-                if (!values.firstName) {
-                    errors.firstName = 'First name is required';
+                if (!values.first_name) {
+                    errors.first_name = 'First name is required';
                 }
 
-                if (!values.lastName) {
-                    errors.lastName = 'Last name is required';
+                if (!values.last_name) {
+                    errors.last_name = 'Last name is required';
                 }
 
                 if (!values.email) {
@@ -34,10 +39,16 @@ const SignUpForm = () => {
                 ) {
                     errors.email = 'Invalid email address';
                 }
+
+                if (values.password !== values.passwordConfirm) {
+                    errors.password = "Passwords must match."
+                    errors.passwordConfirm = "Passwords must match."
+                    // We'll validate the rest in the backend
+                }
                 return errors
             }}
-            onSubmit={() => {
-                console.log('form submitted!!')
+            onSubmit={(values, actions) => {
+                signUpMutation.mutate(values)
             }}
         >
              {({
@@ -63,32 +74,38 @@ const SignUpForm = () => {
                             </Form.Group>
                         )}
                     </Field>
-                    <Field name="firstName">
-                        {({field, formProps}) => (
-                            <Form.Group className="mb-3"
-                                        controlId="firstName">
-                                <Form.Label>First Name</Form.Label>
-                                <Form.Control type="text"
-                                              placeholder="First Name"
-                                              value={field.value}
-                                              onChange={field.onChange}
-                                />
-                            </Form.Group>
-                        )}
-                    </Field>
-                    <Field name="lastName">
-                        {({field, formProps}) => (
-                            <Form.Group className="mb-3"
-                                        controlId="lastName">
-                                <Form.Label>Last Name</Form.Label>
-                                <Form.Control type="text"
-                                              placeholder="Last Name"
-                                              value={field.value}
-                                              onChange={field.onChange}
-                                />
-                            </Form.Group>
-                        )}
-                    </Field>
+                    <Row>
+                        <Col width={6}>
+                            <Field name="first_name">
+                                {({field, formProps}) => (
+                                    <Form.Group className="mb-3"
+                                                controlId="first_name">
+                                        <Form.Label>First Name</Form.Label>
+                                        <Form.Control type="text"
+                                                      placeholder="First Name"
+                                                      value={field.value}
+                                                      onChange={field.onChange}
+                                        />
+                                    </Form.Group>
+                                )}
+                            </Field>
+                        </Col>
+                        <Col width={6}>
+                            <Field name="last_name">
+                                {({field, formProps}) => (
+                                    <Form.Group className="mb-3"
+                                                controlId="last_name">
+                                        <Form.Label>Last Name</Form.Label>
+                                        <Form.Control type="text"
+                                                      placeholder="Last Name"
+                                                      value={field.value}
+                                                      onChange={field.onChange}
+                                        />
+                                    </Form.Group>
+                                )}
+                            </Field>
+                        </Col>
+                    </Row>
                     <Field name="password">
                         {({field, formProps}) => (
                             <Form.Group className="mb-3"
