@@ -107,3 +107,21 @@ $transition-time: 0.5s;
   transform: translate3d(0, 0, 0);
   transition: all $transition-time ease-in-out;
 }
+
+.screen-front {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  width: 100%
+}
+
+.btn-todo-primary {
+  @include primary-gradient;
+  border: $color-primary;
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color: #be2424;
+  font-weight: bold;
+}
