@@ -4,5 +4,5 @@ import {constants} from "../constants"
 
 export function createUserAccount (data) {
     const url = constants["baseSiteURL"] + "/accounts/users/"
-    postData(url, data)
+    return postData(url, data)
 }

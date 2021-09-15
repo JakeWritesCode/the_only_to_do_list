@@ -4,16 +4,15 @@ import {ArrowBack} from "@material-ui/icons";
 import {useHistory} from "react-router-dom";
 import {Card, Button, Form, Row, Col} from "react-bootstrap"
 import {Formik, Field} from 'formik';
-import {useMutation} from "react-query";
 import {createUserAccount} from "api/accounts"
+import {applyAPIErrorsToFormik} from "api/helpers";
 
 const SignUpForm = () => {
     const history = useHistory()
 
-    const signUpMutation = useMutation(validatedFormData => createUserAccount(validatedFormData))
-
     return (
         <Formik
+
             initialValues={{
                 email: "",
                 first_name: '',
@@ -21,7 +20,9 @@ const SignUpForm = () => {
                 password: "",
                 passwordConfirm: ""
             }}
+
             validateOnChange={true}
+
             validate={(values) => {
                 let errors = {};
                 if (!values.first_name) {
@@ -39,7 +40,9 @@ const SignUpForm = () => {
                 ) {
                     errors.email = 'Invalid email address';
                 }
-
+                if (!values.password) {
+                    errors.password = "you must enter a password!"
+                }
                 if (values.password !== values.passwordConfirm) {
                     errors.password = "Passwords must match."
                     errors.passwordConfirm = "Passwords must match."
@@ -47,14 +50,30 @@ const SignUpForm = () => {
                 }
                 return errors
             }}
-            onSubmit={(values, actions) => {
-                signUpMutation.mutate(values)
+
+            onSubmit={async (values, actions) => {
+                const response = await createUserAccount(values)
+                const status = response.status
+                const data = await response.json()
+                switch (status) {
+                    case 201:
+                        actions.resetForm()
+                        // TODO - Something, possible move to home screen when it exists.
+                        break
+                    case 400:
+                        applyAPIErrorsToFormik(actions, data)
+                        break
+                    default:
+                        actions.setStatus("There was a problem, please try again!")
+                }
             }}
         >
-             {({
+
+            {({
                   errors,
                   touched,
-                  handleSubmit
+                  handleSubmit,
+                  status
               }) => (
                 <Form>
                     <Field name="email">
@@ -86,6 +105,8 @@ const SignUpForm = () => {
                                                       value={field.value}
                                                       onChange={field.onChange}
                                         />
+                                        {touched.first_name && errors.first_name &&
+                                        <div className="form-error">{errors.first_name}</div>}
                                     </Form.Group>
                                 )}
                             </Field>
@@ -101,6 +122,8 @@ const SignUpForm = () => {
                                                       value={field.value}
                                                       onChange={field.onChange}
                                         />
+                                        {touched.last_name && errors.last_name &&
+                                        <div className="form-error">{errors.last_name}</div>}
                                     </Form.Group>
                                 )}
                             </Field>
@@ -116,6 +139,8 @@ const SignUpForm = () => {
                                               value={field.value}
                                               onChange={field.onChange}
                                 />
+                                {touched.password && errors.password &&
+                                <div className="form-error">{errors.password}</div>}
                             </Form.Group>
                         )}
                     </Field>
@@ -129,9 +154,17 @@ const SignUpForm = () => {
                                               value={field.value}
                                               onChange={field.onChange}
                                 />
+                                {touched.passwordConfirm && errors.passwordConfirm &&
+                                <div className="form-error">{errors.passwordConfirm}</div>}
                             </Form.Group>
                         )}
                     </Field>
+                    <Row>
+                        <Col>
+                            {status && <p className="form-error"
+                                          id="signup-nonfield-errors">{status.message}</p>}
+                        </Col>
+                    </Row>
                     <Button className="btn btn-lg btn-todo-primary" onClick={handleSubmit}>Sign
                         Up</Button>
                     <Button className="btn btn-lg btn-light float-end"
