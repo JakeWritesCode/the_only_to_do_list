@@ -15,8 +15,8 @@ const SignUpForm = () => {
 
             initialValues={{
                 email: "",
-                first_name: '',
-                last_name: '',
+                first_name: "",
+                last_name: "",
                 password: "",
                 passwordConfirm: ""
             }}
@@ -34,7 +34,7 @@ const SignUpForm = () => {
                 }
 
                 if (!values.email) {
-                    errors.email = 'Required';
+                    errors.email = 'Email address is required';
                 } else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
@@ -165,8 +165,10 @@ const SignUpForm = () => {
                                           id="signup-nonfield-errors">{status.message}</p>}
                         </Col>
                     </Row>
-                    <Button className="btn btn-lg btn-todo-primary" onClick={handleSubmit}>Sign
-                        Up</Button>
+                    <Button className="btn btn-lg btn-todo-primary"
+                            onClick={handleSubmit}
+                            id="sign-up-confirm"
+                    >Sign Up</Button>
                     <Button className="btn btn-lg btn-light float-end"
                             onClick={() => history.push("/login")}>Go to Log In</Button>
                 </Form>
